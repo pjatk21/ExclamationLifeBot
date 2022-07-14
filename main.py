@@ -8,7 +8,7 @@ load_dotenv()
 TELEGRAM_API_KEY = os.getenv('TELEGRAM_API_KEY')
 bot = Bot(token=TELEGRAM_API_KEY)
 scraper = BotScraper()
-
+num_of_warnings = 0
 
 try:
     dp = Dispatcher(bot)
@@ -19,6 +19,7 @@ except Exception as e:
 
 @dp.message_handler(commands=['poll'])
 async def create_poll(message: types.Message):
+    global num_of_warnings
     """
     poll command handler
     Create a poll with a question (first parameter) and a list of answers (the rest of the parameters). Example: /poll question | option2 | option3
@@ -36,11 +37,14 @@ async def create_poll(message: types.Message):
         try:
             await message.delete()
         except Exception as e:
-            await message.reply("Bot doesn't have rights to delete messages!")
+            if num_of_warnings < 3:
+                await message.reply("Bot doesn't have rights to delete messages!")
+                num_of_warnings += 1
 
 
 @dp.message_handler(commands=['anonymous_message'])
 async def create_anonymous_message(message: types.Message):
+    global num_of_warnings
     """
     anonymous_message command handler
     Create an anonymous message with a text (first parameter). Example: /anonymous_message Hello world
@@ -54,7 +58,9 @@ async def create_anonymous_message(message: types.Message):
         try:
             await message.delete()
         except Exception as e:
-            await message.reply("Bot doesn't have rights to delete messages!")
+            if num_of_warnings < 3:
+                await message.reply("Bot doesn't have rights to delete messages!")
+                num_of_warnings += 1
         await bot.send_message(message.chat.id, message.get_args())
 
 
@@ -71,7 +77,9 @@ async def print_random_dark_humor_message(message: types.Message):
     try:
         await message.delete()
     except Exception as e:
-        await message.reply("Bot doesn't have rights to delete messages!")
+        if num_of_warnings < 3:
+            await message.reply("Bot doesn't have rights to delete messages!")
+            num_of_warnings += 1
 
 
 if __name__ == '__main__':
