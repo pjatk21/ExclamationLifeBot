@@ -25,5 +25,6 @@ class BotScraper:
         for value in joke:
             result += str(value)
 
-        print('\n\n' + result)
+        ## Print the joke in the console
+        # print('\n\n' + result)
         return result
