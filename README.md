@@ -1,9 +1,10 @@
-##!Life Bot
+## !Life Bot
+
 [![Under Development](https://img.shields.io/badge/under-development-orange.svg)](https://github.com/cezaraugusto/github-template-guidelines)
 
 Another useless telegram bot for your entertainment.
 
-##Commands
+## Commands
 As of this moment, the bot only supports the following commands:
 ```
 /poll - Create a poll. The poll will be created in the chat where the command was issued. First argument is the question, the second argument is the options separated by " | " text. Example: /poll What is your favorite color? | red | blue | green
