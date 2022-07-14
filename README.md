@@ -1,6 +1,6 @@
 ## !Life Bot
 
-[![Under Development](https://img.shields.io/badge/under-development-orange.svg)](https://github.com/cezaraugusto/github-template-guidelines)
+[![Under Development](https://img.shields.io/badge/under-development-orange.svg)](https://github.com/pjatk21/ExclamationLifeBot)
 
 Another useless telegram bot for your entertainment.
 
