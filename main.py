@@ -19,13 +19,14 @@ except Exception as e:
 
 @dp.message_handler(commands=['poll'])
 async def create_poll(message: types.Message):
-    global num_of_warnings
     """
     poll command handler
     Create a poll with a question (first parameter) and a list of answers (the rest of the parameters). Example: /poll question | option2 | option3
     :param message: types.Message object
     :return:
     """
+    global num_of_warnings
+
     arguments = message.get_args().split(' | ')
     if len(arguments) < 2:
         await message.reply('You must specify at least two options\nExample: /poll question | option2 | option3')
@@ -44,13 +45,14 @@ async def create_poll(message: types.Message):
 
 @dp.message_handler(commands=['anonymous_message'])
 async def create_anonymous_message(message: types.Message):
-    global num_of_warnings
     """
     anonymous_message command handler
     Create an anonymous message with a text (first parameter). Example: /anonymous_message Hello world
     :param message: types.Message object
     :return:
     """
+    global num_of_warnings
+
     if len(message.get_args()) < 1:
         await message.reply('You must specify at least two options\nExample: /anonymous_message Hello world')
         return
@@ -72,6 +74,7 @@ async def print_random_dark_humor_message(message: types.Message):
     :param message: types.Message object
     :return:
     """
+    global num_of_warnings
 
     await bot.send_message(message.chat.id, scraper.get_dark_joke(), parse_mode='html')
     try:
