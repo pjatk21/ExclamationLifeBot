@@ -11,7 +11,7 @@ As of this moment, the bot only supports the following commands:
 /anonymous_message - Sends anonymous message to the chat. The message will be sent anonymously. The first argument is the message. Example: /anonymous_message Hello world!
 ```
 ## Installing
-Clone this project and create .env file with the following variables:
+Clone this project and create `.env` file with the following variables:
 ```
 TELEGRAM_API_KEY=<your-telegram-bot-token>
 ```
