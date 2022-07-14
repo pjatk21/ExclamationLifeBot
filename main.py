@@ -29,7 +29,7 @@ async def create_poll(message: types.Message):
 
     arguments = message.get_args().split(' | ')
     if len(arguments) < 2:
-        await message.reply('You must specify at least two options\nExample: /poll question | option2 | option3')
+        await message.reply('You must specify at least two options\nExample: /poll question | option1 | option2')
         return
     else:
         await bot.send_poll(message.chat.id, question=utils.markdown.bold(arguments[0]),
@@ -54,14 +54,14 @@ async def create_anonymous_message(message: types.Message):
     global num_of_warnings
 
     if len(message.get_args()) < 1:
-        await message.reply('You must specify at least two options\nExample: /anonymous_message Hello world')
+        await message.reply('You must specify at least one option\nExample: /anonymous_message Hello world')
         return
     else:
         try:
             await message.delete()
         except Exception as e:
             if num_of_warnings < 3:
-                await message.reply("Bot doesn't have rights to delete messages!")
+                await message.reply("Bot doesn't have rights to delete user command messages!")
                 num_of_warnings += 1
         await bot.send_message(message.chat.id, message.get_args())
 
@@ -81,7 +81,26 @@ async def print_random_dark_humor_message(message: types.Message):
         await message.delete()
     except Exception as e:
         if num_of_warnings < 3:
-            await message.reply("Bot doesn't have rights to delete messages!")
+            await message.reply("Bot doesn't have rights to delete user command messages!")
+            num_of_warnings += 1
+
+
+@dp.message_handler(commands=['kremowka'])
+async def send_kremowka(message: types.Message):
+    """
+    kremowka command handler
+    Send a random kremowka image
+    :param message: types.Message object
+    :return:
+    """
+    global num_of_warnings
+
+    await bot.send_photo(message.chat.id, scraper.get_kremowka())
+    try:
+        await message.delete()
+    except Exception as e:
+        if num_of_warnings < 3:
+            await message.reply("Bot doesn't have rights to delete user command messages!")
             num_of_warnings += 1
 
 
