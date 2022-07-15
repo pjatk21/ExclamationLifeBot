@@ -3,7 +3,7 @@ import random
 from bs4 import BeautifulSoup
 
 PL_DARK_HUMOR_URL = 'https://kawaly.tja.pl/czarny-humor'
-PL_KREMOWKA_URL = 'https://www.google.com/search?q=cenzopapa&newwindow=1&sxsrf=ALiCzsYLEsw9T7OcUHp4HMCeQsUUk9yAEw:1657831101798&source=lnms&tbm=isch&sa=X&ved=2ahUKEwiS9K2Pnvn4AhWKUXcKHfzXDgQQ_AUoAXoECAEQAw&cshid=1657831218038877&biw=2560&bih=1289&dpr=1.5'
+PL_KREMOWKA_URL = 'https://kwejk.pl/tag/cenzopapa/strona/'
 
 
 class BotScraper:
@@ -36,8 +36,12 @@ class BotScraper:
         Get a random kremowka message from the Polish website 'wykop.pl'
             :return: kremowka as an image url
         """
-        soup = BeautifulSoup(requests.get(self.kremowka_page).text, 'html.parser')
+        soup = BeautifulSoup(requests.get(self.kremowka_page + str(random.randint(1, 3))).text, 'html.parser')
 
-        kremowki = soup.find_all('img')
-        kremowka = random.choice(kremowki)['src']
+        kremowki = [kremowka['src'] for kremowka in soup.find_all('img', class_='full-image')]
+
+        kremowka = random.choice(kremowki)
+        while kremowka is None:
+            kremowka = random.choice(kremowki)
+
         return kremowka
