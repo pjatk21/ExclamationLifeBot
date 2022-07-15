@@ -33,7 +33,7 @@ class BotScraper:
 
     def get_kremowka(self):
         """
-        Get a random kremowka message from the Polish website 'wykop.pl'
+        Get a random kremowka message from the Polish website 'kwejk.pl'
             :return: kremowka as an image url
         """
         soup = BeautifulSoup(requests.get(self.kremowka_page + str(random.randint(1, 3))).text, 'html.parser')
